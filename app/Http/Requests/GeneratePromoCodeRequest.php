@@ -11,7 +11,7 @@ class GeneratePromoCodeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,15 @@ class GeneratePromoCodeRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
+          return [
+            'promo_cod'            => ['nullable', 'string'],
+            'expiry_date'          => ['nullable', 'date'],
+            'max_usage_per_user'   => ['nullable', 'integer'],
+            'max_usage'            => ['nullable', 'integer'],
+            'users'                => ['nullable', 'array'],
+            'users.*'              => ['integer'],
+            'promo_type'           => ['required', Rule::in(['percentage', 'value'])],
+            'value'                => ['required', 'numeric'],
         ];
     }
 }

@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    
+    public function promoCodes()
+    {
+        return $this->belongsToMany(PromoCode::class);
+    }
 }

@@ -9,11 +9,19 @@ use App\Http\Requests\CheckPromoCodeRequest;
 class PromoCode extends Controller
 {
  
+    /**
+     * Generate new Promo code
+     * @param GeneratePromoCodeRequest $request
+     */
     public function generate(GeneratePromoCodeRequest $request) {
         
     }
     
-    public function check($param) {
+    /**
+     * Check on promo code if valid
+     * @param CheckPromoCodeRequest $request
+     */
+    public function check(CheckPromoCodeRequest $request) {
         
     }
     

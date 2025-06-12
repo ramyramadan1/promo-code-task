@@ -11,7 +11,7 @@ class CheckPromoCodeRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class CheckPromoCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+                'price'                => ['required', 'numeric', 'gt:0'],
+                'promo_code'           => ['required', 'string'],
         ];
     }
 }

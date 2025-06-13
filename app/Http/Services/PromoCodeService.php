@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Services;
+namespace App\Http\Services;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\PromoCode;
+use Illuminate\Support\Str;
 
 class PromoCodeService
 {
@@ -13,19 +13,20 @@ class PromoCodeService
      * @param type $params
      */
     public function create($params){
-        $params->code = (isset($params->code) && !empty($params->code))?$params->code: $this->generateNew($params) ;
+        $params->code = (isset($params->code) && !empty($params->code))?$params->code: $this->generateCode($params) ;
         PromoCode::create(
                 [
                 'code' => $params->code, 
                 'status' => 'active', 
                 'expiry_date' => $params->expiry_date??null, 
-                'max_usage' => 100,
+                'max_usage' => $params->max_usage??null,
                 'usage_times' => 0,
-                'promo_type' => 'percentage', // or 'value'
-                'value' => 15.5,
+                'promo_type' => 'percentage', 
+                'value' => $params->value,
             ]
         );
         
+        return $params->code;
     }
     
     /**
@@ -33,10 +34,20 @@ class PromoCodeService
      * @param type $params
      * @return type
      */
-    public function generateNew($params) {
+    public function generateCode($params) {
          do {
             $code = Str::upper(Str::random(5));
-        } while (Promo::where('code', $code)->exists());
+        } while (PromoCode::where('code', $code)->exists());
         return $code;
+    }
+    
+    
+    /**
+     * Make promo code expired
+     * @param type $id
+     */
+    public function expirePromoCode($id) {
+            $promo = PromoCode::findOrFail($id);
+            $promo->update(['status'=>'expired']);
     }
 }

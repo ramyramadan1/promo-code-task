@@ -66,6 +66,7 @@ class PromoCodeService
             $promo->increment('usage_times');
         }
         $result['price'] = $params->price;
+        dd($promo->type);
         switch ($promo->type){
             case 'percentage':
                 $result['promocode_discounted_amount'] = (($params->price * $promo->value) / 100);

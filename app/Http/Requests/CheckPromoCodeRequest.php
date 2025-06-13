@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\ValidPromoCode;
 
 class CheckPromoCodeRequest extends FormRequest
 {
@@ -23,7 +24,7 @@ class CheckPromoCodeRequest extends FormRequest
     {
         return [
                 'price'                => ['required', 'numeric', 'gt:0'],
-                'promo_code'           => ['required', 'string'],
+                'code'           => ['required', 'string', new ValidPromoCode],
         ];
     }
 }

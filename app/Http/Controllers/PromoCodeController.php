@@ -27,12 +27,9 @@ class PromoCodeController extends Controller
      * Check on promo code if valid
      * @param CheckPromoCodeRequest $request
      */
-    public function check(CheckPromoCodeRequest $request) {
-        return response()->json(['message' => 'Promo code  is valid']);
-    }
-    
-    private function validate($param) {
-        
+    public function redeem(CheckPromoCodeRequest $request) {
+        $result = $this->promoCodeService->redeemCode($request);
+        return response()->json(['message' => 'Promo code  is valid','result'=> $result]);
     }
     
     

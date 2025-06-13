@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class PromoCode extends Model
 {
+    
+    
     static $STATUS_EXPIRED = 'expired';
     static $STATUS_ACTIVE = 'active';
     
@@ -15,4 +17,13 @@ class PromoCode extends Model
     {
         return $this->belongsToMany(User::class);
     }
+    
+    public function promoCodeUser()
+    {
+        return $this->hasMany(PromoCodeUser::class);
+    }
+    
+    
+    
+    
 }

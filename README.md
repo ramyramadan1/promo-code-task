@@ -20,3 +20,19 @@
 ## To run tests 
 - php artisan test
 
+## Cases coverd 
+- create new user ( admin )
+- create new user ( user )
+- give permission to admin only to generate promo code
+- check if admin can generate promo code with only code without (max_usage , expiry  , user_ids )
+- check if admin can generate promo code with only code , max_usage without ( expiry  , user_ids )
+- check if admin can generate promo code with only code , max_usage , expiry  without ( user_ids )
+- check if admin can generate promo code with only code , max_usage , expiry  , user_id without ( max_usage_per_user)
+- check on user if he is able to generate promo code .
+- check if user can not add promo code .
+- check if user can redeem promo code  (assigned to him).
+- check if user can not redeem promo code ( if he reach to max usage assigned to him )
+- check if user can redeem promo code ( not assigned to him but not reach to max usage )
+- check promo code can not be used when it's expired by admin .
+- check promo cod could not be used because it read to it's expiry date .
+

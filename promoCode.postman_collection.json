@@ -1,0 +1,338 @@
+{
+	"info": {
+		"_postman_id": "232fbb74-319d-4b4c-9be3-3f4d05a8d137",
+		"name": "promoCode",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32715419"
+	},
+	"item": [
+		{
+			"name": "GenerateToken",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse JSON response",
+							"let response = pm.response.json();",
+							"",
+							"// Check if token exists",
+							"if (response.access_token) {",
+							"    // Set the token in environment variable",
+							"    pm.environment.set(\"token\", response.access_token);",
+							"    console.log(\"Token saved to environment:\", response.token);",
+							"} else {",
+							"    console.warn(\"Token not found in response.\");",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "@User1_$$",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "019769c8-b92a-7071-a334-fc651301f25e",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "6IS7HWS6TDYUXl1s5MKI1VAjbeFB6FaothkzGbJ8",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "user@example.com",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "*",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/oauth/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GenerateToken Admin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Parse JSON response",
+							"let response = pm.response.json();",
+							"",
+							"// Check if token exists",
+							"if (response.access_token) {",
+							"    // Set the token in environment variable",
+							"    pm.environment.set(\"token\", response.access_token);",
+							"    console.log(\"Token saved to environment:\", response.token);",
+							"} else {",
+							"    console.warn(\"Token not found in response.\");",
+							"}",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "@Admin1_$$",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "019769c8-b92a-7071-a334-fc651301f25e",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "6IS7HWS6TDYUXl1s5MKI1VAjbeFB6FaothkzGbJ8",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "admin@example.com",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "*",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/oauth/token",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generatePromoCode",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "{{url}}/promo-code/generate",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"promo-code",
+						"generate"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "generatePromoCode",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "promo_type",
+									"value": "percentage",
+									"type": "text"
+								},
+								{
+									"key": "value",
+									"value": "10",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/promo-code/generate",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"promo-code",
+								"generate"
+							]
+						}
+					},
+					"status": "Internal Server Error",
+					"code": 500,
+					"_postman_previewlanguage": "html",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Sat, 14 Jun 2025 09:28:51 GMT"
+						},
+						{
+							"key": "Server",
+							"value": "Apache/2.4.58 (Ubuntu)"
+						},
+						{
+							"key": "Vary",
+							"value": "Authorization"
+						},
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "Content-Type",
+							"value": "text/html; charset=UTF-8"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "checkPromoCode",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "promo_code",
+							"value": "MRCUZ",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/promo-code/check",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"promo-code",
+						"check"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\ValidationRule;
 use App\Models\PromoCode;
 use \Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class ValidPromoCode implements ValidationRule
 {
@@ -17,7 +18,10 @@ class ValidPromoCode implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $promo = PromoCode::with('users')->where('code', $value)->first();
+        $promo = Cache::remember('promo_codes', now()->addMinutes(60), function () {
+            return  PromoCode::with('users')->where('status', PromoCode::$STATUS_ACTIVE)->get();
+        });
+        $promo = $promo->where('code', $value)->first();
         //check if not exists
         if (! $promo) {
             $fail('Promo code does not exist.');

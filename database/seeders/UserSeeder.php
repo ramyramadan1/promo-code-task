@@ -36,8 +36,7 @@ class UserSeeder extends Seeder
          $user->assignRole('user');
         
         DB::statement("INSERT INTO `oauth_clients` (`id`, `owner_type`, `owner_id`, `name`, `secret`, `provider`, `redirect_uris`, `grant_types`, `revoked`, `created_at`, `updated_at`) VALUES
-            ('019769c8-b92a-7071-a334-fc651301f25e', NULL, 2, 'test2', '$2y$12$4CQG6xJKiizh3r3osaXfIOhwthVCSrwBebdNAlh3MvKlGdYGp6hBG', NULL, '[\"http:\\/\\/localhost\\/auth\\/callback\"]', '[\"authorization_code\",\"refresh_token\",\"urn:ietf:params:oauth:grant-type:device_code\",\"password\"]', 0, '2025-06-13 11:54:11', '2025-06-13 11:54:11')");
-        DB::statement("INSERT INTO `oauth_clients` (`id`, `owner_type`, `owner_id`, `name`, `secret`, `provider`, `redirect_uris`, `grant_types`, `revoked`, `created_at`, `updated_at`) VALUES
-            ('01976b67-c10f-7221-bc8e-beb5cac47658', NULL, 1, 'test3', '$2y$12$/Yz//IA1LlV6/aNfUAvLF.3WsPG/ioEWuaoFpZ1F1Zfx/CBgbdza2', 'users', '[]', '[\"password\",\"refresh_token\"]', 0, '2025-06-13 11:59:01', '2025-06-13 11:59:01')");
+('01976e3b-bcb5-7305-9ef5-908ef797584f', NULL, NULL, 'user1', '$2y$12\$joXBbMbqSAt/pTxjQRjXk.ntn9STeX1ROoIoh3aU7lDYlRGWhPnXC', 'users', '[]', '[\"password\",\"refresh_token\"]', 0, '2025-06-14 08:38:18', '2025-06-14 08:38:18');
+");
     }
 }
